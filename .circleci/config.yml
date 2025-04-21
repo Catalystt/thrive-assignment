@@ -12,13 +12,14 @@ jobs:
       - run:
           name: Build the docker image
           command: docker build -t jasonhuang0425/node-hello-world:latest .
-      - deploy:
+      - run:
           name: Push to docker dev repository if MASTER
           command: |
             if [ "${CIRCLE_BRANCH}" == "main" ];
               then
                 docker push jasonhuang0425/node-hello-world:latest
             fi
+    
     # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
     resource_class: small
 workflows:
