@@ -2,16 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-        - image: cimg/node:23.11.0
+      - image: cimg/node:23.11.0
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Change to node application directory
-          command: cd app
-      - run:
           name: Build the docker image
-          command: docker build -t jasonhuang0425/node-hello-world:latest -f app/Dockerfile .
+          command: |
+            docker build -t jasonhuang0425/node-hello-world:latest -f app/Dockerfile . --build-arg NODE_ENV=production
       - deploy:
           name: Push to docker dev repository if MASTER
           command: |
