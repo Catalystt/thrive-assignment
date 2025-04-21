@@ -17,6 +17,7 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "main" ];
               then
+                echo "${DOCKERHUB_PASS}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
                 docker push jasonhuang0425/node-hello-world:latest
             fi
     
