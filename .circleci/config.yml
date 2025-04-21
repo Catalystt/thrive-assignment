@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+        - image: cimg/node:23.11.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+ 	name: Change to node application directory
+	command: cd app
+      - run:
+          name: Build the docker image
+          command: docker build -t jasonhuang0425/node-hello-world::latest .
+      - deploy:
+          name: Push to docker dev repository if MASTER
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ];
+              then
+                docker push jasonhuang0425/node-hello-world:latest
+            fi
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: small
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /master/
