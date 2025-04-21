@@ -15,7 +15,7 @@ jobs:
       - deploy:
           name: Push to docker dev repository if MASTER
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ];
+            if [ "${CIRCLE_BRANCH}" == "main" ];
               then
                 docker push jasonhuang0425/node-hello-world:latest
             fi
@@ -28,4 +28,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: /master/
+              only: /main/
