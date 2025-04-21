@@ -7,7 +7,7 @@ CI/CD is done with building with CircleCi, and push onto DockerHub, and have it 
 
 
 
-Requirements:
+#Requirements:
 AWS 
 Terraform
 git
@@ -15,14 +15,18 @@ DockerHub
 CircleCi
 
 
-Spin Up VPC and EKS Cluster
+#Spin Up VPC and EKS Cluster
 git clone https://github.com/Catalystt/thrive-assignment.git
 cd terraform
 terraform init
 terraform plan
 terraform apply
 
-AWS CLI Setup
+
+
+
+
+# AWS CLI Setup
 With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
 Editting ~/.aws/credentials to have another profile is probably the easiest method.
 
@@ -30,7 +34,6 @@ Editting ~/.aws/credentials to have another profile is probably the easiest meth
 aws_access_key_id=DANY08141327EXAMPLE
 aws_secret_access_key=dAnYBayMAxEÑXpkJsy/KPxRfiCYEXAMPLElKEY
 
-# Don´t use the prefix "profile" 
 [user2]
 aws_access_key_id=YOUR_ACCESS_KEY
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
@@ -38,8 +41,12 @@ aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
 Once that's done you can run: export AWS_PROFILE=user2
 Now your AWS CLI should be configured with the new accont
 
-CircleCI Setup
 
+
+
+
+
+#CircleCI Setup
 In your CircleCI project's settings there is a page to configure environment variables. We'll need a variable named DOCKERHUB_USERNAME with the value of your username, and one named DOCKERHUB_PASS with the value of a personal access token  created for CircleCI. I would recommend against saving your password in plaintext.
 
 
