@@ -7,8 +7,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-  name: Change to node application directory
- command: cd app
+          name: Change to node application directory
+          command: cd app
       - run:
           name: Build the docker image
           command: docker build -t jasonhuang0425/node-hello-world::latest .
