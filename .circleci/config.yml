@@ -11,7 +11,7 @@ jobs:
           command: cd app
       - run:
           name: Build the docker image
-          command: docker build -t jasonhuang0425/node-hello-world::latest .
+          command: docker build -t jasonhuang0425/node-hello-world:latest .
       - deploy:
           name: Push to docker dev repository if MASTER
           command: |
