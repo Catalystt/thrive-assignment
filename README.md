@@ -14,11 +14,47 @@ This is a great feature but it introduces a limitation in the number of Pods per
 
 
 ## Requirements:
-AWS 
-Terraform
-git
-DockerHub
-CircleCi
+-AWS 
+-Terraform
+-git
+-DockerHub
+-CircleCi
+
+## AWS CLI Setup
+With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
+Editting ~/.aws/credentials to have another profile is probably the easiest method.
+```
+[default]
+aws_access_key_id=DANY08141327EXAMPLE
+aws_secret_access_key=dAnYBayMAxEÑXpkJsy/KPxRfiCYEXAMPLElKEY
+
+[user2]
+aws_access_key_id=YOUR_ACCESS_KEY
+aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
+```
+Once that's done you can run: ```export AWS_PROFILE=user2```
+Check your access with: ```aws s3api list-buckets ```
+Now your AWS CLI should be configured with the new account
+
+## DockerHub Setup
+You should create your own DockerHub repo for this, and replace the repo in all of the images: 
+-!./github/workflow/deploy.yaml (https://imgur.com/SVnkPtu)
+-!./k8s/deployment.yaml (https://imgur.com/vkTuP12)
+-!./circleci/config.yaml 
+
+## Github Actions Setup
+
+Make sure you have added the following secrets in your GitHub repository settings under Settings>Environments>production:
+
+-DOCKERHUB_USERNAME
+-DOCKERHUB_TOKEN
+-AWS_ACCESS_KEY_ID
+-AWS_SECRET_ACCESS_KEY
+-AWS_REGION: "ca-central-1"
+-CLUSTER_NAME: "devops-cluster" (your EKS cluster’s name)
+-NAMESPACE: "default" (the namespace in which your app is deployed)
+-DEPLOYMENT_NAME: "hello-world-deployment" (the name of your Kubernetes Deployment)
+-CONTAINER_NAME: "hello-world" (the container name within that deployment)
 
 
 ## Spin Up VPC and EKS Cluster
@@ -37,27 +73,18 @@ kubectl get nodes
 kubectl get all -A
 ```
 
+## Deployments/Services
+```
+kubectl apply -f deployment.yaml
+kubectl apply -f deployment_svc.yaml
+kubectl apply -f ingress.yaml
+kubectl apply -f secrets.yaml
+```
+
 ## Testing Deployment
 ```
 kubectl port-forward svc/hello-world-service 3000:80
 ```
-
-
-## AWS CLI Setup
-With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
-Editting ~/.aws/credentials to have another profile is probably the easiest method.
-```
-[default]
-aws_access_key_id=DANY08141327EXAMPLE
-aws_secret_access_key=dAnYBayMAxEÑXpkJsy/KPxRfiCYEXAMPLElKEY
-
-[user2]
-aws_access_key_id=YOUR_ACCESS_KEY
-aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
-```
-Once that's done you can run: ```export AWS_PROFILE=user2```
-Check your access with: ```aws s3api list-buckets ```
-Now your AWS CLI should be configured with the new account
 
 
 
