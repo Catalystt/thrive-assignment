@@ -7,8 +7,9 @@ CI/CD is done with building with Github Actions, and pushed onto DockerHub, depl
 Added an option to use CircleCI but there was no way to have it deploy onto EKS.
 
 
-!(https://i.imgur.com/vUm9UIi.png "AWS Architecture")
-!(https://i.imgur.com/gvJ4MdG.png)
+![Imgur](https://i.imgur.com/vUm9UIi.png "AWS Architecture")
+![Imgur](https://i.imgur.com/gvJ4MdG.png)
+![Imgur](http://i.imgur.com/zTONrOD.jpg)
 ## Limitations
 The Amazon VPC CNI plugin for Kubernetes is deployed with each of your EC2 Nodes in a Daemonset with the name aws-node. Using this plugin allows Kubernetes Pods to have the same IP address inside the pod as they do on the VPC network.
 This is a great feature but it introduces a limitation in the number of Pods per EC2 Node instance. Whenever you deploy a Pod in the EKS worker Node, EKS creates a new IP address from VPC subnet and attach to the instance. You can find here https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI the maximum number of network interfaces and maximum number of IPs per interface.
@@ -135,11 +136,10 @@ Now your AWS CLI should be configured with the new account
 ## DockerHub Setup
 You should create your own DockerHub repo for this, and replace the repo in all of the images: 
 * ./github/workflow/deploy.yaml:
-
-![/github/workflow/deploy.yaml] (https://imgur.com/SVnkPtu)
+![Imgur] (https://imgur.com/SVnkPtu)
 
 * ./k8s/deployment.yaml:
-![/k8s/deployment.yaml] (https://imgur.com/vkTuP12)
+![Imgur] (https://imgur.com/vkTuP12)
 * ./circleci/config.yaml 
 
 ## Github Actions Setup
