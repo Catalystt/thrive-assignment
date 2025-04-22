@@ -14,11 +14,11 @@ This is a great feature but it introduces a limitation in the number of Pods per
 
 
 ## Requirements:
--AWS 
--Terraform
--git
--DockerHub
--CircleCi
+* AWS 
+* Terraform
+* git
+* DockerHub
+* CircleCi
 
 ## AWS CLI Setup
 With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
@@ -38,23 +38,22 @@ Now your AWS CLI should be configured with the new account
 
 ## DockerHub Setup
 You should create your own DockerHub repo for this, and replace the repo in all of the images: 
--!./github/workflow/deploy.yaml (https://imgur.com/SVnkPtu)
--!./k8s/deployment.yaml (https://imgur.com/vkTuP12)
--!./circleci/config.yaml 
+* ![./github/workflow/deploy.yaml] (https://imgur.com/SVnkPtu)
+* ![./k8s/deployment.yaml] (https://imgur.com/vkTuP12)
+* ./circleci/config.yaml 
 
 ## Github Actions Setup
-
 Make sure you have added the following secrets in your GitHub repository settings under Settings>Environments>production:
 
--DOCKERHUB_USERNAME
--DOCKERHUB_TOKEN
--AWS_ACCESS_KEY_ID
--AWS_SECRET_ACCESS_KEY
--AWS_REGION: "ca-central-1"
--CLUSTER_NAME: "devops-cluster" (your EKS cluster’s name)
--NAMESPACE: "default" (the namespace in which your app is deployed)
--DEPLOYMENT_NAME: "hello-world-deployment" (the name of your Kubernetes Deployment)
--CONTAINER_NAME: "hello-world" (the container name within that deployment)
+- DOCKERHUB_USERNAME
+- DOCKERHUB_TOKEN
+- AWS_ACCESS_KEY_ID
+- AWS_SECRET_ACCESS_KEY
+- AWS_REGION: "ca-central-1"
+- CLUSTER_NAME: "devops-cluster" (your EKS cluster’s name)
+- NAMESPACE: "default" (the namespace in which your app is deployed)
+- DEPLOYMENT_NAME: "hello-world-deployment" (the name of your Kubernetes Deployment)
+- CONTAINER_NAME: "hello-world" (the container name within that deployment)
 
 
 ## Spin Up VPC and EKS Cluster
@@ -85,7 +84,7 @@ kubectl apply -f secrets.yaml
 ```
 kubectl port-forward svc/hello-world-service 3000:80
 ```
-
+From here you can ```curl --v localhost:3000``` or use a browser to hit localhost:3000
 
 
 
