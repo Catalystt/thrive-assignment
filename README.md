@@ -149,6 +149,8 @@ You should create your own DockerHub repo for this, and replace the repo in all 
 ![Imgur] (https://imgur.com/vkTuP12.png)
 * ./circleci/config.yaml 
 
+You also need to create an access key, in Account Settings > Personal access tokens > Personal access tokens > Generate new Token > Generate
+Save the access token for Github Actions.
 ## Github Actions Setup
 Make sure you have added the following secrets in your GitHub repository settings under Settings>Environments>production:
 
