@@ -4,4 +4,7 @@ variable "aws_region" {
   default     = "ca-central-1"
 }
 
-
+variable "alert_email" {
+  description = "Email address to receive CloudWatch alerts"
+  type        = string
+}

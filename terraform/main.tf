@@ -167,3 +167,26 @@ module "eks_node_group" {
   instance_type         = "t3.micro"
   worker_ami_id         = "ami-0920121c85512b7db"           # Replace with your region's EKS-optimized AMI ID
 }
+
+resource "aws_sns_topic" "alert_topic" {
+  name = "cloudwatch-alerts"
+}
+
+resource "aws_sns_topic_subscription" "email_subscription" {
+  topic_arn = aws_sns_topic.alert_topic.arn
+  protocol  = "email"
+  endpoint  = var.alert_email  # Set this value in your variables.tf or via Terraform CLI
+}
+
+resource "aws_cloudwatch_metric_alarm" "high_cpu" {
+  alarm_name          = "HighCPUUsage"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 300                     # 5-minute period
+  statistic           = "Average"
+  threshold           = 70                      # Alert if CPU exceeds 70%
+  alarm_description   = "Alarm when CPU utilization exceeds 70%"
+  alarm_actions       = [aws_sns_topic.alert_topic.arn]
+}

@@ -25,7 +25,7 @@ On a t3.micro we're limited to 4 pods. This makes things very difficult as I wan
 
 ## AWS CLI Setup
 We need to create a new user for the CLI. We need three things here: a new policy, a new user, and the access keys.
-1. Policy \n
+1. Policy
 Policies > Create policy > JSON > Paste the snippet below > Name it cli-policy > Create policy
 ```
 {
@@ -112,10 +112,10 @@ Policies > Create policy > JSON > Paste the snippet below > Name it cli-policy >
 }
 ```
 
-2. User\n 
+2. User 
 Users > Create user > Name it cli-user > Attach policy directly > Find your newly created cli-policy > Check it > Next > Create user
 
-3. Access Keys\n
+3. Access Keys
 With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
 Editting ~/.aws/credentials to have another profile is probably the easiest method.
 ```
@@ -134,10 +134,11 @@ Now your AWS CLI should be configured with the new account
 
 ## DockerHub Setup
 You should create your own DockerHub repo for this, and replace the repo in all of the images: 
-* ./github/workflow/deploy.yaml:\n
+* ./github/workflow/deploy.yaml:
+
 ![/github/workflow/deploy.yaml] (https://imgur.com/SVnkPtu)
 
-* ./k8s/deployment.yaml:\n
+* ./k8s/deployment.yaml:
 ![/k8s/deployment.yaml] (https://imgur.com/vkTuP12)
 * ./circleci/config.yaml 
 
@@ -206,7 +207,7 @@ kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch
 Once the pod for cloudwatch-agent is running, you should see a new log group appear in Cloudwatch, and you can look through metrics in Cloudwatch for each worker node. 
 
 ## Alerts 
-Can
+Currently setup on Cloudwatch to alert on high CPU of a worker node, can change to detect on pod crashing but didn't have enough time. I originally wanted to alert through Grafana/Prometheus and setup a webhook with Slack.
 
 ## SSL certificates with cert-bot. Add secrets manager access through cluster.
 Unable to implement due to nodes being t3.micro, unable to allocate pods for cert-manager. (Ingress and service already setup for it)
