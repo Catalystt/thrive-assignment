@@ -7,7 +7,8 @@ CI/CD is done with building with Github Actions, and pushed onto DockerHub, depl
 Added an option to use CircleCI but there was no way to have it deploy onto EKS.
 
 
-
+!(https://i.imgur.com/vUm9UIi.png "AWS Architecture")
+!(https://i.imgur.com/gvJ4MdG.png)
 ## Limitations
 The Amazon VPC CNI plugin for Kubernetes is deployed with each of your EC2 Nodes in a Daemonset with the name aws-node. Using this plugin allows Kubernetes Pods to have the same IP address inside the pod as they do on the VPC network.
 This is a great feature but it introduces a limitation in the number of Pods per EC2 Node instance. Whenever you deploy a Pod in the EKS worker Node, EKS creates a new IP address from VPC subnet and attach to the instance. You can find here https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI the maximum number of network interfaces and maximum number of IPs per interface.
@@ -24,7 +25,7 @@ On a t3.micro we're limited to 4 pods. This makes things very difficult as I wan
 
 ## AWS CLI Setup
 We need to create a new user for the CLI. We need three things here: a new policy, a new user, and the access keys.
-1. Policy 
+1. Policy \n
 Policies > Create policy > JSON > Paste the snippet below > Name it cli-policy > Create policy
 ```
 {
@@ -111,10 +112,10 @@ Policies > Create policy > JSON > Paste the snippet below > Name it cli-policy >
 }
 ```
 
-2. User 
+2. User\n 
 Users > Create user > Name it cli-user > Attach policy directly > Find your newly created cli-policy > Check it > Next > Create user
 
-3. Access Keys
+3. Access Keys\n
 With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
 Editting ~/.aws/credentials to have another profile is probably the easiest method.
 ```
@@ -133,8 +134,11 @@ Now your AWS CLI should be configured with the new account
 
 ## DockerHub Setup
 You should create your own DockerHub repo for this, and replace the repo in all of the images: 
-![./github/workflow/deploy.yaml] (https://imgur.com/SVnkPtu)
-![./k8s/deployment.yaml] (https://imgur.com/vkTuP12)
+* ./github/workflow/deploy.yaml:\n
+![/github/workflow/deploy.yaml] (https://imgur.com/SVnkPtu)
+
+* ./k8s/deployment.yaml:\n
+![/k8s/deployment.yaml] (https://imgur.com/vkTuP12)
 * ./circleci/config.yaml 
 
 ## Github Actions Setup
