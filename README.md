@@ -31,10 +31,11 @@ terraform apply
 ```
 
 You can generate or update your local kubeconfig file using the AWS CLI. This command will fetch the connection details for your cluster and add them to your kubeconfig (typically located at ~/.kube/config).
-
-aws eks update-kubeconfig --name my-cluster --region ca-central-1
+```
+aws eks update-kubeconfig --name devops-cluster --region ca-central-1
 kubectl get nodes
-
+kubectl get all -A
+```
 
 ## Testing Deployment
 ```
@@ -45,7 +46,7 @@ kubectl port-forward svc/hello-world-service 3000:80
 ## AWS CLI Setup
 With a fresh AWS account you'll need to setup a AWS Access Key and Secret Access Key for your cli user in IAM. Under Users > Create access key > Check CLI
 Editting ~/.aws/credentials to have another profile is probably the easiest method.
-
+```
 [default]
 aws_access_key_id=DANY08141327EXAMPLE
 aws_secret_access_key=dAnYBayMAxEÑXpkJsy/KPxRfiCYEXAMPLElKEY
@@ -53,9 +54,9 @@ aws_secret_access_key=dAnYBayMAxEÑXpkJsy/KPxRfiCYEXAMPLElKEY
 [user2]
 aws_access_key_id=YOUR_ACCESS_KEY
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
-
-Once that's done you can run: export AWS_PROFILE=user2
-Check your access with: aws s3api list-buckets 
+```
+Once that's done you can run: ```export AWS_PROFILE=user2```
+Check your access with: ```aws s3api list-buckets ```
 Now your AWS CLI should be configured with the new account
 
 
