@@ -225,7 +225,7 @@ helm install cert-manager cert-manager/cert-manager --namespace cert-manager --c
 kubectl apply -f k8s/cluster-issuer.yaml
 ```
 
-Also wanted to add secrets manager integration. 
+Also wanted to add secrets manager integration. But not enough time. 
 
 
 ## Cleanup
