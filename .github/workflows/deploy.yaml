@@ -37,7 +37,7 @@ jobs:
           context: ./app
           file: ./app/Dockerfile
           push: true
-          tags: jasonhuang0425/node-hello-world:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_IMAGE }}
 
       # Configure AWS credentials for EKS access
       - name: Configure AWS Credentials
@@ -58,7 +58,7 @@ jobs:
           NAMESPACE: ${{ secrets.NAMESPACE }}
           DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME }}
           CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-          DOCKER_IMAGE: "jasonhuang0425/node-hello-world:${{ github.sha }}"
+          DOCKER_IMAGE: ${{ secrets.DOCKER_IMAGE }}
         run: |
           echo "Updating image for deployment ${DEPLOYMENT_NAME} in namespace ${NAMESPACE}..."
           kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_IMAGE} -n ${NAMESPACE}
