@@ -58,7 +58,7 @@ jobs:
           NAMESPACE: ${{ secrets.NAMESPACE }}
           DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME }}
           CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-          DOCKER_IMAGE: "jasonhuang0425/node-hello-world:latest"
+          DOCKER_IMAGE: "jasonhuang0425/node-hello-world:${{ github.sha }}"
         run: |
           echo "Updating image for deployment ${DEPLOYMENT_NAME} in namespace ${NAMESPACE}..."
           kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_IMAGE} -n ${NAMESPACE}
