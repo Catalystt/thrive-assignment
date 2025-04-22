@@ -36,8 +36,14 @@ variable "max_size" {
   default     = 3
 }
 
-variable "instance_types" {
-  description = "List of EC2 instance types for the node group"
-  type        = list(string)
-  default     = ["t3.micro"]
+variable "instance_type" {
+  description = "The EC2 instance type for the node group"
+  type        = string
+  default     = "t3.micro"
 }
+
+variable "worker_ami_id" {
+  description = "AMI ID to use for the EKS worker nodes (EKS optimized)"
+  type        = string
+}
+
