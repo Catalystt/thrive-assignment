@@ -112,12 +112,7 @@ Policies > Create policy > JSON > Paste the snippet below > Name it cli-policy >
             "Sid": "AllowSNSManagementForCloudWatchAlerts",
             "Effect": "Allow",
             "Action": [
-                "sns:CreateTopic",
-                "sns:DeleteTopic",
-                "sns:Subscribe",
-                "sns:Unsubscribe",
-                "sns:Publish",
-                "sns:GetTopicAttributes"
+                "sns:*"
             ],
             "Resource": "arn:aws:sns:ca-central-1:699475945643:cloudwatch-alerts"
         }
@@ -221,7 +216,7 @@ Once the pod for cloudwatch-agent is running, you should see a new log group app
 ## Alerts 
 Currently setup on Cloudwatch to alert on high CPU of a worker node, can change to detect on pod crashing but didn't have enough time. I originally wanted to alert through Grafana/Prometheus and setup a webhook with Slack.
 
-## SSL certificates with cert-bot. Add secrets manager access through cluster.
+## SSL certificates with cert-bot. 
 Unable to implement due to nodes being t3.micro, unable to allocate pods for cert-manager. (Ingress and service already setup for it)
 ```
 helm repo add cert-manager https://charts.jetstack.io
@@ -230,6 +225,7 @@ helm install cert-manager cert-manager/cert-manager --namespace cert-manager --c
 kubectl apply -f k8s/cluster-issuer.yaml
 ```
 
+Also wanted to add secrets manager integration. 
 
 
 ## Cleanup
