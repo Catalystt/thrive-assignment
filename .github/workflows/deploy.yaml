@@ -37,7 +37,7 @@ jobs:
           context: ./app
           file: ./app/Dockerfile
           push: true
-          tags: jasonhuang0425/node-hello-world:latest
+          tags: jasonhuang0425/node-hello-world:${{ github.sha }}
 
       # Configure AWS credentials for EKS access
       - name: Configure AWS Credentials
