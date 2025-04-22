@@ -7,7 +7,7 @@ CI/CD is done with building with Github Actions, and pushed onto DockerHub, depl
 Added an option to use CircleCI but there was no way to have it deploy onto EKS.
 
 
-![Imgur](https://imgur.com/vUm9UIi.png)
+![Imgur](https://imgur.com/yUIUQxo.png)
 ![Imgur](https://i.imgur.com/gvJ4MdG.png)
 ## Limitations
 The Amazon VPC CNI plugin for Kubernetes is deployed with each of your EC2 Nodes in a Daemonset with the name aws-node. Using this plugin allows Kubernetes Pods to have the same IP address inside the pod as they do on the VPC network.
@@ -146,7 +146,7 @@ Now your AWS CLI should be configured with the new account
 
 
 ## DockerHub Setup
-You should create your own DockerHub repo for this, and replace the repo in all of the images: 
+You should create your own DockerHub repo for this, and replace the repo in all of the files below: 
 * ./github/workflow/deploy.yaml:
 ![Imgur] (https://imgur.com/SVnkPtu.png)
 
